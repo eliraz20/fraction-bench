@@ -2,9 +2,16 @@ using System.Globalization;
 using System.Numerics;
 
 CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+if (args.Length > 0 && args[0] == "lesson")
+{
+    try { LessonReport.Run(args); return 0; }
+    catch (Exception e) when (e is FormatException or IOException or ArgumentException or OverflowException or UnauthorizedAccessException or Microsoft.Data.Sqlite.SqliteException)
+    { Console.Error.WriteLine(e.Message); return 1; }
+}
+
 if (args.Length != 1 || args[0] == "--help")
 {
-    Console.WriteLine("Usage: dotnet run -- <input-file|->");
+    Console.WriteLine("Usage: dotnet run -- lesson learning.db study.tsv  |  original format: <input-file|->");
     return args.Length == 1 ? 0 : 2;
 }
 

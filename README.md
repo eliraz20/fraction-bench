@@ -1,19 +1,38 @@
 # Fraction Bench
 
-Compare fractions using the smallest common denominator and show the equivalent numerators.
+Practice fraction comparisons, see misplaced answers on a number line, and revisit personal mistakes next lesson.
 
 ## Try it
 
-Install the .NET 10 SDK, open this folder, and run:
+From this folder with the .NET 10 SDK installed:
 
 ```sh
-dotnet run -- example.tsv
+dotnet run -- lesson learning.db study.tsv
 ```
 
-Look for `16/24 > 15/24` in the output. To use your own data, copy the example and pass the new filename. Use `-` to read from standard input.
+Run lesson learning.db for interactive practice (enter <, =, > or q). For a tutor-led import use four integers and the learner’s answer per TSV row. A mistake generates a related pair, stores the missed problem and displays both positions on a scaled number line. A correct replay clears that problem.
 
-## Input
+The included study.tsv uses tab-separated fields. Comment lines start with `#`.
 
-One comparison per row: numerator A, positive denominator A, numerator B, positive denominator B. Separate columns with actual tabs, omit a header row, and use a period for decimal fractions.
+The database is created on first use. Use a different database filename for another class or team.
 
-Built for literacy and numeracy coursework. [ISCED-F field 002](https://uis.unesco.org/sites/default/files/documents/isced-fields-of-education-and-training-2013-en.pdf).
+The original exercise remains available with `dotnet run -- example.tsv`.
+
+## When to use it
+
+A tutor needs a record of which comparisons a learner missed, and a related question for the next meeting.
+
+Example result:
+
+```text
+-7/12  ?  -4/7
+Both are left of zero. The one farther left is smaller.
+On a common scale: -49/84 < -48/84.
+-49/84 |*································| 84/84  A=-7/12, B=-4/7, * = same display position
+Try the reflection: 7/12 ? 4/7
+2/3  ?  5/8
+Correct.
+Review next lesson: 1 missed pair(s).
+```
+
+Related course or field workflow: [Research on preservice teachers diagnosing fraction errors](https://doi.org/10.3390/math9161870).
